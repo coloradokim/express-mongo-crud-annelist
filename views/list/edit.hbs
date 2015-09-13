@@ -1,0 +1,15 @@
+<h1>Edit Post</h1>
+
+{{#thePost}}
+<form action="/list/{{_id}}/update" method="post">
+  <label for="title">Title</label>
+  <input type="text" name="title" value="{{title}}">
+  <label for="author">Author</label>
+  <input type="text" name="author" value="{{author}}">
+  <label for="url">Picture URL</label>
+  <input type="text" name="url" value="{{url}}">
+  <label for="post">Post</label>
+  <textarea name="post" rows="8" cols="40" value="{{post}}"></textarea>
+  <input type="submit" name="name" value="Edit Post">
+</form>
+{{/thePost}}

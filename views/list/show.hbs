@@ -1,0 +1,11 @@
+{{#thePost}}
+  <h1>{{title}}</h1>
+  <h2>by {{author}}</h2>
+  <img src="{{url}}" alt="" />
+  <p>{{post}}</p>
+  <a href="/list/{{_id}}/edit">Edit Post</a>
+
+  <form action="/list/{{_id}}/delete" method="post">
+    <input type="submit" value="Delete Post">
+  </form>
+{{/thePost}}
