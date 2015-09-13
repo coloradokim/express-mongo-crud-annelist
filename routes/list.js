@@ -14,13 +14,30 @@ router.get('/list/new', function (req, res, next) {
 });
 
 router.post('/list', function (req, res, next) {
-  listCollection.insert(
+  var errors = [];
+  if (!req.body.title) {
+    errors.push('Title field cannot be blank')
+  }
+  if (!req.body.author) {
+    errors.push(' Author field cannot be blank')
+  }
+  if (!req.body.url) {
+    errors.push(' Please enter a valid URL')
+  }
+  if (!req.body.post) {
+    errors.push(' Post cannot be blank')
+  }
+  if (errors.length) {
+    res.render('list/new', {errors: errors})
+  } else {
+    listCollection.insert(
     {title: req.body.title,
     author: req.body.author,
     url: req.body.url,
     post: req.body.post,
     comments: []});
-  res.redirect('/list');
+    res.redirect('/list');
+  };
 });
 
 router.get('/list/:id', function (req, res, next) {
