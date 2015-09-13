@@ -1,3 +1,10 @@
 <h1>Welcome to Anne's List!</h1>
 
+{{#each allPosts}}
+<h2>{{title}}</h2>
+<h2>{{author}}</h2>
+<img src="{{url}}" alt="" />
+<p>{{post}}</p>
+{{/each}}
+
 <a href="list/new">New Post</a>
