@@ -13,16 +13,20 @@ router.get('/list/new', function (req, res, next) {
   res.render('list/new');
 });
 
-
 router.post('/list', function (req, res, next) {
   listCollection.insert(
     {title: req.body.title,
     author: req.body.author,
     url: req.body.url,
     post: req.body.post,
-    comments: []
-  });
+    comments: []});
   res.redirect('/list');
+});
+
+router.get('/list/:id', function (req, res, next) {
+  listCollection.findOne({_id: req.params.id}, function (err, record) {
+    res.render('list/show', {thePost: record});
+  });
 });
 
 
