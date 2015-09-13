@@ -65,12 +65,28 @@ router.post('/list/:id/update', function (req, res, next) {
 });
 
 router.post('/list/:id/delete', function (req, res, next) {
-  listCollection.remove({_id: req.params.id}, function(err, record) {
+  listCollection.remove({_id: req.params.id}, function (err, record) {
     if (err) throw err
   });
   res.redirect('/list')
 });
 
+var counter = 0;
+router.post('/list/:id', function (req, res, next) {
+  counter++;
+  req.body.id = counter
+  listCollection.findOne(req.params.id, function (err, record) {
+    record.comments.push(req.body)
+    listCollection.update(req.params.id, record, function (err, record) {
+      res.redirect('/list');
+    });
+  });
+});
 
+router.get('list/:id/comments', function (req, res, next) {
+  listCollection.findOne({_id: req.params.id}, function (err, record) {
+    res.render('list/comments', {thePost: record});
+  });
+});
 
 module.exports = router;

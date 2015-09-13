@@ -6,7 +6,13 @@
 <img src="{{url}}" alt="" />
 <p>{{post}}</p>
 <a href="/list/{{_id}}">View Individual Post</a>
-{{/each}}
 
+  <h3>Comments</h3>
+  {{#each comments}}
+    <h4>Name: {{commentName}}</h4>
+    <h4>Comment: {{commentText}}</h4>
+  {{/each}}
+  <a href="/list/{{_id}}/comments">View Comments</a>
+{{/each}}
 
 <a href="list/new">New Post</a>
