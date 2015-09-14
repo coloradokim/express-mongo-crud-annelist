@@ -57,8 +57,7 @@ router.post('/list/:id/update', function (req, res, next) {
     {title: req.body.title,
     author: req.body.author,
     url: req.body.url,
-    post: req.body.post,
-    comments: []}, function (err, record) {
+    post: req.body.post}, function (err, record) {
       if (err) throw err
     });
     res.redirect('/list')
@@ -85,8 +84,19 @@ router.post('/list/:id', function (req, res, next) {
 
 router.get('list/:id/comments', function (req, res, next) {
   listCollection.findOne({_id: req.params.id}, function (err, record) {
+    console.log(record);
     res.render('list/comments', {thePost: record});
   });
 });
+
+router.post('/list/:id/comments/delete', function(req,res,next){
+   listCollection.findOne({_id: req.params.id}, function(err, record){
+     var index = record.comments.indexOf(req.body.comment)
+     record.comments.splice(index,1);
+     listCollection.update({_id: req.params.id}, doc, function(err, doc) {
+       res.redirect('/list/' + req.params.id)
+     });
+   });
+ });
 
 module.exports = router;
